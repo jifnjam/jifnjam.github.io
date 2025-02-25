@@ -1,0 +1,30 @@
+baseURL = 'https://jifnjam.github.io/'
+languageCode = 'en-us'
+title = 'EasyExcel'
+theme = "ananke"
+[params] 
+     text_color = "black"
+     background_color_class = "bg-navy"
+     body_classes = "helvetica bg-near-white"
+
+[menus]
+     [[menus.main]]
+          name = "Home"
+          pageRef = "/"
+          weight = 10
+     [[menus.main]]
+          name = 'About'
+          pageRef = '/about'
+          weight = 15
+     [[menus.main]]
+          name = 'Basics'
+          pageRef = '/basics'
+          weight = 20
+     [[menus.main]]
+          name = 'Formulas'
+          pageRef = '/formulas'
+          weight = 25
+     [[menus.main]]
+          name = 'Projects'
+          pageRef = '/projects'
+          weight = 30
