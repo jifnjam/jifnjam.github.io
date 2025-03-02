@@ -1,26 +1,38 @@
-name: Deploy Hugo site EasyExcel to Pages
+name: GitHub Pages EasyExcel
 
 on:
   push:
     branches:
-      - main  # This triggers the workflow when you push to the main branch
-  workflow_dispatch:  # Allows you to manually trigger the workflow from the Actions tab
-
-defaults:
-  run:
-    shell: bash  # Use bash for the majority of commands
+      - main  # Set a branch name to trigger deployment
+  pull_request:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+  deploy:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - name: Publish Site
-        uses: chabad360/hugo-actions@master
+      - uses: actions/checkout@v4
         with:
-          buildPath: 'public'
-          # Use if you have a need to build the site to another directory
-          hugoVersion: 'extended_'
-          # Use if your site requires a specific version of Hugo
-          # Append "extended_" to the begining to use Hugo Extended
-          args: --minify --cleanDestinationDir
-          # Use if you want to pass some custom arguments to Hugo
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.110.0'
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        # If you're changing the branch from main,
+        # also change the `main` in `refs/heads/main`
+        # below accordingly.
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
