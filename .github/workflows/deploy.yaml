@@ -1,0 +1,26 @@
+name: Deploy Hugo site EasyExcel to Pages
+
+on:
+  push:
+    branches:
+      - main  # This triggers the workflow when you push to the main branch
+  workflow_dispatch:  # Allows you to manually trigger the workflow from the Actions tab
+
+defaults:
+  run:
+    shell: bash  # Use bash for the majority of commands
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    steps:
+      - name: Publish Site
+        uses: chabad360/hugo-actions@master
+        with:
+          buildPath: 'public'
+          # Use if you have a need to build the site to another directory
+          hugoVersion: 'extended_'
+          # Use if your site requires a specific version of Hugo
+          # Append "extended_" to the begining to use Hugo Extended
+          args: --minify --cleanDestinationDir
+          # Use if you want to pass some custom arguments to Hugo
