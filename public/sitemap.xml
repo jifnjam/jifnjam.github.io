@@ -20,18 +20,14 @@
     <loc>http://localhost:1313/about/</loc>
     <lastmod>2025-02-24T23:36:01-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/beginner/</loc>
-    <lastmod>2025-02-24T23:34:49-05:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/posts/second-post/</loc>
-    <lastmod>2025-02-24T23:34:49-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-02-24T23:34:49-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/my-first-post/</loc>
     <lastmod>2025-02-24T23:32:28-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
   </url>
 </urlset>
