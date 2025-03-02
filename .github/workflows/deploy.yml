@@ -1,0 +1,49 @@
+name: Deploy Hugo site to Pages
+
+on:
+  push:
+    branches:
+      - main  # This triggers the workflow when you push to the main branch
+  workflow_dispatch:  # Allows you to manually trigger the workflow from the Actions tab
+
+permissions:
+  contents: read  # Read access to repository contents
+  pages: write    # Write access to GitHub Pages
+  id-token: write # Write access to the id-token
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false  # Ensures only one deployment is running at a time
+
+defaults:
+  run:
+    shell: bash  # Use bash for the majority of commands
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Hugo 0.145.0
+        run: |
+          # Download Hugo 0.145.0 and install it
+          curl -LO https://github.com/gohugoio/hugo/releases/download/v0.145.0/hugo_extended_0.145.0_linux-amd64.deb
+          sudo dpkg -i hugo_extended_0.145.0_linux-amd64.deb
+
+      - name: Build the site with Hugo
+        run: |
+          hugo --minify --cleanDestinationDir
+
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build  # Wait for the build job to finish
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
