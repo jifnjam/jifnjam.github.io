@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     concurrency:
@@ -20,12 +20,12 @@ jobs:
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v4
         with:
-          hugo-version: '0.110.0'
-
+          hugo-version: '0.144.2'
+          extended: true
       - name: Build
-        run: hugo --minify
+        run: hugo --minify --cleanDestinationDir
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
