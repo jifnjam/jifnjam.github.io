@@ -14,17 +14,17 @@ theme = "ananke"
           weight = 10
      [[menus.main]]
           name = 'About'
-          pageRef = '/about'
+          pageRef = '/about/'
           weight = 15
      [[menus.main]]
           name = 'Basics'
-          pageRef = '/basics'
+          pageRef = '/basics/'
           weight = 20
      [[menus.main]]
           name = 'Formulas'
-          pageRef = '/formulas'
+          pageRef = '/formulas/'
           weight = 25
      [[menus.main]]
           name = 'Projects'
-          pageRef = '/projects'
+          pageRef = '/projects/'
           weight = 30
